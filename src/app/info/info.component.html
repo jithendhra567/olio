@@ -1,0 +1,38 @@
+<div class="info">
+    <img src="{{item['img']}}" alt="">
+
+    <div class="item_content">
+        <div class="main">
+            <div class="content">
+                <h3>{{item['title']}}</h3>
+                <div class="tags">
+                    <div *ngFor="let tag of item['tags']" class="tag" >{{tag.name}}</div>
+                </div>
+                <div class="veg">{{item['veg']}}</div>
+            </div>
+
+            <div>
+                <h4>₹ {{item['prize']}}</h4>
+                <div class="type">
+                    <ng-container *ngIf="item['half']; else elseTemplate">
+                        <mat-checkbox  [checked]="!item['isfull']" (click)="half(item['id'])" style="font-size: 14px; margin-bottom: -8px;">Half</mat-checkbox>
+                    </ng-container>
+                    <ng-template #elseTemplate><h4>full</h4></ng-template>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <div matRipple class="cancel" (click)="close()">
+          <h3>Close</h3>
+        </div>
+        <div matRipple class="placeorder"  id="c" (click)="addtocart(item['id'])">
+            <h3>Add</h3>
+            <mat-icon>add_shopping_cart</mat-icon>
+        </div>
+    </div>
+</div>

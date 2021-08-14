@@ -1,0 +1,110 @@
+<div class="search" id="search">
+    <mat-icon aria-hidden="false" aria-label="Search">add_shopping_cart</mat-icon>
+    <input type="text" placeholder="Search ... " class="search_text">
+    <div class="card" matRipple>
+        <p class="search_item" >Go</p>
+    </div>
+</div>
+
+<div id="content">
+    <div class="body_olio">
+        <ngb-carousel
+        [showNavigationArrows]="false"
+        interval="2000">
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img class="carosuel_img" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2Vyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Angular Carousel 1">
+              </div>
+            </ng-template>
+
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img class="carosuel_img" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Angular Carousel 2">
+              </div>
+            </ng-template>
+
+        </ngb-carousel>
+    </div>
+
+    <div class="horizantal_scrollmenu" >
+        <div class="toolbar">
+            <h1 class="title">Menu</h1>
+            <!-- <span class="spacer"></span>
+            <p class="veg" style="margin-top: 8px;">VEG</p>
+            <mat-slide-toggle class="veg" [color]="color" [checked]="checked" [disabled]="disabled"></mat-slide-toggle> -->
+        </div>
+        <div class="card" style="margin-top: -10px; background-color: #3b3a3aa9;">
+        </div>
+
+        <div class="scroll">
+            <div *ngFor="let item of data" class="item" [routerLink]="['./items',item.id]">
+                <div class="item_image">
+                    <img  src={{item.img}} />
+                </div>
+                <div class="item_content" matRipple>
+                    <div class="main_content">
+                        <h3>{{item.title}}</h3>
+                        <div class="veg">{{item.veg}}</div>
+                    </div>
+                    <div class="side_content">
+                        <h4>Items</h4>
+                        <p>{{item.items}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="special">
+        <div class="toolbar">
+            <h1 class="title">Special Items</h1>
+            <span class="spacer"></span>
+            <div matRipple class="floatingcart" (click)="cart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </div>
+            <div class="notification">
+                <p #notify >0</p>
+            </div>
+        </div>
+        <div class="card" style="margin-top: -10px; background-color: #3b3a3a7e;">
+        </div>
+
+        <div class="menu_list" id="menu">
+            <div *ngFor="let special of specials" class="item" id="{{special.id}}">
+                <div class="item_image" (click)="itemInfo(special.id)">
+                    <img class="shine" src="{{special.img}}"/>
+                </div>
+                <div class="item_content">
+                    <div class="main">
+                        <div class="content">
+                            <h3>{{special.title}}</h3>
+                            <div class="tags">
+                                <div *ngFor="let tag of special.tags" class="tag">{{tag.name}}</div>
+                            </div>
+                            <div class="cont">
+                              <div class="veg">{{special.veg}}</div>
+                              <div class="half">
+                                <ng-container *ngIf="special.half; else elseTemplate">
+                                    <mat-checkbox [checked]="!special[Name.isFull]" (click)="half(special.id)">Half</mat-checkbox>
+                                </ng-container>
+                                <ng-template #elseTemplate><h4></h4></ng-template>
+                              </div>
+                            </div>
+                          </div>
+
+                        <div class="count">
+                            <h4>₹ {{special['prize']}}</h4>
+                            <div matRipple class="addtocart" id="cart" (click)="addtocart(special.id)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">Add  </p>  </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,152 @@
+
+h1,h3,h4,p{
+    font-family: serif;
+}
+.info{
+    position: relative;
+    font-size: 30px;
+    img{
+        width: 100%;
+    }
+
+    .item_content{
+        margin-left: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        .main{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            .content{
+                h3{
+                    margin: 0px 5px 0px 0px;
+                    font-size: .6em;
+                }
+                p{
+                    margin-top: 5px;
+                    font-size: .45em;
+                }
+                .tags {
+                  display: flex;
+
+                  .tag {
+                    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                    padding: 1px 5px 1px 5px;
+                    border-radius: 3px;
+                    background-color: #c8ecf1;
+                    font-size: .3em;
+                    color:#00c2df;
+                  }
+
+                  .tag~.tag {
+                    margin-left: 5px;
+                  }
+                }
+
+                .veg {
+                  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                  justify-self: center;
+                  margin-top: 4px;
+                  padding: 1px 6px 1px 6px;
+                  display: inline-block;
+                  border-radius: 3px;
+                  background-color: #f0d8f5;
+                  font-size: .3em;
+                  z-index: 100;
+                  color: #9c27c0;
+                }
+            }
+            .counter{
+                margin-top: -5px;
+                display: flex;
+                align-items: center;
+                div{
+                    padding: 5px;
+                    background-color: rgb(233, 224, 224);
+                    height: 24px;
+                    width: 24px;
+                    border-radius: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    mat-icon{
+                        margin-top: 4px;
+                        font-size: .65em;
+                    }
+                }
+                .price{
+                    align-items: flex-end;
+                    margin-top: -5px;
+                    justify-content: space-between;
+                    display: flex;
+                }
+                p{
+                    margin: 0px;
+                    padding: 10px;
+                    font-weight: 600;
+                    font-size: .6em;
+                }
+            }
+            h4{
+                color:  rgb(11, 108, 235);
+                font-weight: 600;
+                font-size: .6em;
+            }
+        }
+
+    }
+
+
+    .bottom{
+        width: 100vw;
+        height: 70px;
+        background-color: rgb(255, 255, 255);
+        position: sticky;
+        margin-left: -16px;
+        bottom: -10px;
+        border-top: .8px solid rgba(0, 0, 0, 0.308);
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        .cancel{
+            height: 30px;
+            display: flex;
+            margin-left: 10px;
+            border-radius: 5px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 2px 5px rgba(97, 97, 97, 0.308);
+            align-items: center;
+            justify-content: center;
+            h3{
+                color: rgb(236, 15, 15);
+                margin: 0px 10px 0px 10px;
+            }
+            mat-icon{
+                color: white;
+            }
+        }
+        .placeorder{
+            height: 40px;
+            display: flex;
+            border-radius: 5px;
+            justify-content: center;
+            background-color: #296fca;
+            box-shadow: 1px 2px rgba(97, 97, 97, 0.308);
+            align-items: center;
+            h3{
+                color: white;
+                margin: 5px 5px 5px 15px;
+            }
+            mat-icon{
+                color: white;
+                margin-right: 10px;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,68 @@
+<div class="search">
+    <mat-icon aria-hidden="false" [routerLink]="['../../']" aria-label="Search">arrow_back</mat-icon>
+    <input type="text" placeholder="Search ... " class="search_text">
+    <div class="card" matRipple>
+        <p class="search_item" (click)="search()">Go</p>
+    </div>
+</div>
+
+
+<div class="menu" id="content">
+
+    <div class="special">
+        <div class="toolbar">
+            <h1 class="title">Menu Items</h1>
+            <span class="spacer"></span>
+            <div matRipple class="floatingcart" (click)="cart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </div>
+            <div class="notification">
+                <p #notify>0</p>
+            </div>
+        </div>
+        <div class="card" style="margin-top: -10px; background-color: #3b3a3a7e;">
+        </div>
+
+        <div class="menu_list" id="menu">
+            <div *ngFor="let item of items" class="item" id="{{item.id}}">
+                <div class="item_image" (click)="iteminfo(item.id)">
+                    <img class="shine" src="{{item.img}}"/>
+                </div>
+                <div class="item_content">
+                    <div class="main">
+                        <div class="content">
+                            <h3>{{item.title}}</h3>
+                            <div class="tags">
+                                <div *ngFor="let tag of item.tags" class="tag">{{tag.name}}</div>
+                            </div>
+                            <div class="cont">
+                              <div class="veg">{{item.veg}}</div>
+                              <div class="half">
+                                <ng-container *ngIf="item.half; else elseTemplate">
+                                    <mat-checkbox [checked]="!item['isfull']" (click)="half(item.id)">Half</mat-checkbox>
+                                </ng-container>
+                                <ng-template #elseTemplate><h4></h4></ng-template>
+                              </div>
+                            </div>
+                          </div>
+
+                        <div class="count">
+                            <h4>₹ {{item['prize']}}</h4>
+                            <div matRipple class="addtocart" id="cart" (click)="addtocart(item.id)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">Add</p>  </div>
+                          </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
