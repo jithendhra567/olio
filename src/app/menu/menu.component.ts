@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
 import { NgwWowService } from 'ngx-wow';
-import {Name,Items} from '../Items';
+import {Name,Items, HotelDetails} from '../Items';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
   data = [];
   specials = [];
   menuItems = {};
+  categories = [];
   color: ThemePalette = 'primary';
   checked = false;
   disabled = false;
@@ -33,33 +34,52 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router,public route:ActivatedRoute, db:AngularFirestore,private _bottomSheet: MatBottomSheet){
     this.db=db;
     this.hotel_name = route.snapshot.params.hotel;
-    //sessionStorage.clear();
-    if(this.hotel_name=='') {alert("please check url"); return}
-    var items = JSON.parse(sessionStorage.getItem(Name.data));
-    if(items != undefined && items.length > 0) {
-      Items.setData(items);
-      this.data = items;
-      this.specials = Items.specialItems;
-    }
-    else {
-      db.collection(this.hotel_name).valueChanges().subscribe((val)=>{
-        val.forEach((doc)=>this.data.push(doc));
-        Items.setData(this.data);
-        this.specials = Items.specialItems;
-      });
-    }
+    sessionStorage.clear();
+    // var items = JSON.parse(sessionStorage.getItem(Name.data));
+    // if(items != undefined && items.length > 0) {
+    //   Items.setData(items);
+    //   this.data = items;
+    //   this.specials = Items.specialItems;
+    // }
+    // else {
+    //   db.collection(this.hotel_name).valueChanges().subscribe((val) => {
+    //     console.log();
+    //     // val.forEach((doc)=>this.data.push(doc));
+    //     // Items.setData(this.data);
+    //     // this.specials = Items.specialItems;
+    //   });
+    // }
 
-    this.cartupdate();
+    db.collection(this.hotel_name).valueChanges().subscribe((val) => {
+      console.log(val);
+      // val.forEach((doc)=>this.data.push(doc));
+      // Items.setData(this.data);
+      // this.specials = Items.specialItems;
+    });
+    db.collection('hotels').doc(this.hotel_name).valueChanges().subscribe((val: HotelDetails) => {
+      const temp: string[] = val.categories;
+      const cats: string[][] = [];
+      const catTemp: string[] = [];
+      let i = 0;
+      temp.forEach(item => {
+        catTemp.push(item);
+        i++;
+        if (i === 4) {
+          cats.push(catTemp);
+          i = 0;
+        }
+      });
+      this.categories = cats;
+    });
+
+    //this.cartupdate();
 
   }
 
   cartupdate(){
     this.specials.forEach((item)=>{
       const [index,__id] = this.getId(item[Name.id]);
-      setTimeout(() => {
-        Items.allItems[__id][index][Name.isAdded]=!Items.allItems[__id][index][Name.isAdded];
-        this.addtocart(item[Name.id]);
-      }, 1000);
+
     });
   }
 
@@ -83,10 +103,6 @@ export class MenuComponent implements OnInit {
   addtocart(id:string){
     const [index,__id] = this.getId(id);
     var cart = <HTMLElement>document.getElementById(id).getElementsByClassName("addtocart")[0];
-    cart.style.backgroundColor=Items.allItems[__id][index][Name.isAdded]?"#296fca":"#f44336";
-    cart.getElementsByTagName("p")[0].innerHTML=Items.allItems[__id][index][Name.isAdded]?"Add ":"Added";
-    Items.allItems[__id][index][Name.isAdded]=!Items.allItems[__id][index][Name.isAdded];
-    Items.updateCart();
     this.cart_notification.nativeElement.innerText = Items.cartItems.length;
   }
 
@@ -96,7 +112,6 @@ export class MenuComponent implements OnInit {
     bottomSheetRef.afterDismissed().subscribe(() => {
       this.specials.forEach((item)=>{
         const [index,__id] = this.getId(item[Name.id]);
-        Items.allItems[__id][index][Name.isAdded]=!Items.allItems[__id][index][Name.isAdded];
         this.addtocart(item[Name.id]);
       });
 
@@ -111,8 +126,6 @@ export class MenuComponent implements OnInit {
     var ref = this._bottomSheet.open(InfoComponent,{data: {id:id}});
     ref.afterDismissed().subscribe(() => {
       this.specials.forEach((item)=>{
-        const [index,__id] = this.getId(item[Name.id]);
-        Items.allItems[__id][index][Name.isAdded]=!Items.allItems[__id][index][Name.isAdded];
         this.addtocart(item[Name.id]);
       });
     })

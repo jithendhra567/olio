@@ -11,36 +11,26 @@ export class OrderComponent implements OnInit {
 
   isEditable = false;
   check = false;
-  cartDetails = [];
+  cartItems = Items.cartItems;
   total:number = 0;
   isPlaceOrder = false;
   constructor(private zone: NgZone,private winRef: WindowRefService,private buttonsheetref:MatBottomSheetRef) {
     this._window = this.winRef.nativeWindow;
-    this.cartDetails = Items.cartItems;
-    for(var i in this.cartDetails)  this.cartDetails[i][Name.count] = 1;
-    this.updatePrize();
+    for (var i in this.cartItems) {
+      this.cartItems[i][Name.count] = 1;
+      this.total += +this.cartItems[i].rate;
+    }
+
   }
 
   ngOnInit(): void {
   }
 
-  updatePrize(){
-    this.total = 0;
-    for(var i in this.cartDetails){
-      this.total += this.cartDetails[i][Name.count]*this.cartDetails[i][Name.prize];
+  getCartId(id) {
+    for (let i = 0; i < this.cartItems.length; i++){
+      if (this.cartItems[i].itemId === id) return i;
     }
-  }
-
-
-  half(id){
-    const i = this.getCartId(id);
-    this.cartDetails[i][Name.isFull]=!this.cartDetails[i][Name.isFull];
-  }
-
-  getCartId(id){
-    for(var i in this.cartDetails){
-      if(this.cartDetails[i][Name.id]==id) return i;
-    }
+    return -1;
   }
 
   getId(id){
@@ -55,31 +45,27 @@ export class OrderComponent implements OnInit {
     return [index,__id];
   }
 
-  add(id){
+  add(id: string){
     var index = this.getCartId(id);
-    var counter = document.getElementById(id).getElementsByClassName(Name.count);
-    this.cartDetails[index][Name.count]++;
-    counter[0].getElementsByTagName("p")[0].innerHTML=this.cartDetails[index][Name.count];
-    this.updatePrize();
+    this.cartItems[index][Name.count]++;
+    this.total = 0;
+    this.cartItems.forEach(val => this.total += +val.rate*(+val.count));
   }
 
-  remove(id){
+  remove(id: string){
     var index = this.getCartId(id);
-    var counter = document.getElementById(id).getElementsByClassName(Name.count);
-    if(this.cartDetails[index][Name.count]>1)  this.cartDetails[index][Name.count]--;
-    counter[0].getElementsByTagName("p")[0].innerHTML=this.cartDetails[index][Name.count];
-    this.updatePrize();
+    if (this.cartItems[index][Name.count] > 1) this.cartItems[index][Name.count]--;
+    this.total = 0;
+    this.cartItems.forEach(val => this.total += +val.rate*(+val.count));
   }
 
-  removefromcart(id){
+  removefromcart(id: string){
     var index = this.getCartId(id);
-    this.cartDetails[index][Name.isAdded]=!this.cartDetails[index][Name.isAdded];
-    this.cartDetails.splice(+index,+index)
-    this.updatePrize();
+    this.cartItems.splice(+index, 1);
+    Items.cartItems.splice(+index, 1);
+    this.total = 0;
+    this.cartItems.forEach(val => this.total += +val.rate*(+val.count));
   }
-
-
-
 
   private _window: ICustomWindow;
   public rzp: any;

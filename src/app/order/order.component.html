@@ -5,49 +5,46 @@
     </div>
 
 
-    <ng-container *ngIf="cartDetails.length>0; else elseTemplate">
-      <div class="items">
-        <div *ngFor="let cart of cartDetails" class="item" id="{{cart.id}}">
-          <div class="item_image">
-              <img class="shine" src="{{cart.img}}"/>
-          </div>
-          <div class="item_content">
-              <div class="main">
-                  <div class="content">
-                      <h3>{{cart.title}}</h3>
-                      <div class="cont">
-                        <div class="veg">{{cart.veg}}</div>
-                        <div class="half">
-                          <ng-container *ngIf="cart.half; else elseTemplate">
-                              <mat-checkbox [checked]="!cart.isfull" (click)="half(cart.id)">Half</mat-checkbox>
-                          </ng-container>
-                          <ng-template #elseTemplate><h4></h4></ng-template>
+    <ng-container *ngIf="cartItems.length>0; else elseTemplate">
+        <div class="items">
+            <div *ngFor="let cart of cartItems" class="item" id="{{cart.itemId}}">
+            <div class="item_image">
+                <img class="shine" src="{{cart.image}}"/>
+            </div>
+            <div class="item_content">
+                <div class="main">
+                    <div class="content">
+                        <h3>{{cart.title}}</h3>
+                        <div class="cont">
+                            <!-- <div class="veg">{{cart.veg}}</div> -->
+                            <!-- <div class="half">
+                            <ng-container *ngIf="cart.half; else elseTemplate">
+                                <mat-checkbox [checked]="!cart.isfull" (click)="half(cart.id)">Half</mat-checkbox>
+                            </ng-container>
+                            <ng-template #elseTemplate><h4></h4></ng-template>
+                            </div> -->
                         </div>
-                      </div>
                     </div>
-
-                  <div class="count">
-                      <div class="counter">
-                          <div matRipple (click)="add(cart.id)">
-                              <mat-icon>add</mat-icon>
-                          </div>
-                          <p>{{cart.count}}</p>
-                          <div matRipple (click)="remove(cart.id)">
-                              <mat-icon style="margin-top: -1px;">minimize</mat-icon>
-                          </div>
-                      </div>
-                      <h4>₹ {{cart.count*cart.prize}}</h4>
-                      <div matRipple class="addtocart" id="cart" (click)="removefromcart(cart.id)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">remove</p>  </div>
-                  </div>
-
-              </div>
-
-          </div>
-      </div>
+                    <div class="count">
+                        <div class="counter">
+                            <div matRipple (click)="add(cart.itemId)">
+                                <mat-icon>add</mat-icon>
+                            </div>
+                            <p>{{cart.count}}</p>
+                            <div matRipple (click)="remove(cart.itemId)">
+                                <mat-icon style="margin-top: -1px;">minimize</mat-icon>
+                            </div>
+                        </div>
+                        <h4>₹ {{cart.count*cart.rate}}</h4>
+                        <div matRipple class="addtocart" id="cart" (click)="removefromcart(cart.itemId)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">remove</p>  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     </ng-container>
     <ng-template #elseTemplate>
-      <p style="font-size:30px; margin-top: 20px; margin-bottom: 20px; color: rgba(151, 151, 151, 0.801);">No Items</p>
+        <p style="font-size:30px; margin-top: 20px; margin-bottom: 20px; color: rgba(151, 151, 151, 0.801);">No Items</p>
     </ng-template>
 
 

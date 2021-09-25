@@ -12,17 +12,15 @@
         [showNavigationArrows]="false"
         interval="2000">
             <ng-template ngbSlide>
-              <div class="picsum-img-wrapper">
-                <img class="carosuel_img" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2Vyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Angular Carousel 1">
-              </div>
+                    <div class="picsum-img-wrapper">
+                    <img class="carosuel_img" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2Vyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Angular Carousel 1">
+                </div>
             </ng-template>
-
             <ng-template ngbSlide>
-              <div class="picsum-img-wrapper">
-                <img class="carosuel_img" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Angular Carousel 2">
-              </div>
+                <div class="picsum-img-wrapper">
+                    <img class="carosuel_img" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Angular Carousel 2">
+                </div>
             </ng-template>
-
         </ngb-carousel>
     </div>
 
@@ -35,8 +33,12 @@
         </div>
         <div class="card" style="margin-top: -10px; background-color: #3b3a3aa9;">
         </div>
-
         <div class="scroll">
+            <div class="cats" *ngFor="let items of categories">
+                <p class="cat" *ngFor="let item of items" [routerLink]="['./items',item]">{{item.toUpperCase()}}</p>
+            </div>
+        </div>
+        <!-- <div class="scroll">
             <div *ngFor="let item of data" class="item" [routerLink]="['./items',item.id]">
                 <div class="item_image">
                     <img  src={{item.img}} />
@@ -52,9 +54,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
-
 
     <div class="special">
         <div class="toolbar">
@@ -83,27 +84,22 @@
                                 <div *ngFor="let tag of special.tags" class="tag">{{tag.name}}</div>
                             </div>
                             <div class="cont">
-                              <div class="veg">{{special.veg}}</div>
-                              <div class="half">
+                                <div class="veg">{{special.veg}}</div>
+                                <div class="half">
                                 <ng-container *ngIf="special.half; else elseTemplate">
                                     <mat-checkbox [checked]="!special[Name.isFull]" (click)="half(special.id)">Half</mat-checkbox>
                                 </ng-container>
                                 <ng-template #elseTemplate><h4></h4></ng-template>
-                              </div>
+                                </div>
                             </div>
-                          </div>
-
+                        </div>
                         <div class="count">
                             <h4>₹ {{special['prize']}}</h4>
                             <div matRipple class="addtocart" id="cart" (click)="addtocart(special.id)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">Add  </p>  </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
 

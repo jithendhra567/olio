@@ -17,45 +17,48 @@
                 <mat-icon>add_shopping_cart</mat-icon>
             </div>
             <div class="notification">
-                <p #notify>0</p>
+                <p>{{cartItems}}</p>
             </div>
         </div>
         <div class="card" style="margin-top: -10px; background-color: #3b3a3a7e;">
         </div>
-
         <div class="menu_list" id="menu">
-            <div *ngFor="let item of items" class="item" id="{{item.id}}">
-                <div class="item_image" (click)="iteminfo(item.id)">
+            <!-- <div *ngFor="let item of items" class="item" id="{{item.itemId}}">
+                <div class="item_image" (click)="iteminfo(item.itemId)">
                     <img class="shine" src="{{item.img}}"/>
                 </div>
                 <div class="item_content">
                     <div class="main">
                         <div class="content">
-                            <h3>{{item.title}}</h3>
+                            <h3>{{item.itemName}}</h3>
                             <div class="tags">
                                 <div *ngFor="let tag of item.tags" class="tag">{{tag.name}}</div>
                             </div>
                             <div class="cont">
-                              <div class="veg">{{item.veg}}</div>
-                              <div class="half">
+                                <div class="veg">{{item.veg}}</div>
+                                <div class="half">
                                 <ng-container *ngIf="item.half; else elseTemplate">
                                     <mat-checkbox [checked]="!item['isfull']" (click)="half(item.id)">Half</mat-checkbox>
                                 </ng-container>
                                 <ng-template #elseTemplate><h4></h4></ng-template>
-                              </div>
-                            </div>
-                          </div>
-
+                                </div>
+                            </div> 
+                        </div>
                         <div class="count">
-                            <h4>₹ {{item['prize']}}</h4>
-                            <div matRipple class="addtocart" id="cart" (click)="addtocart(item.id)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">Add</p>  </div>
-                          </div>
-
+                            <h4>₹ {{item['rate']}}</h4>
+                            <div matRipple class="addtocart" id="cart" (click)="addtocart(item.itemId)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">Add</p>  </div>
+                        </div>
                     </div>
-
                 </div>
+            </div> -->
+            <div class="item2" *ngFor="let item of items" id="{{item.itemId}}">
+                <img class="shine" src="{{item.image}}" alt="" srcset="">
+                <div class="content">
+                    <p class="name">{{item.itemName}}</p>
+                    <p class="rate">{{item.rate}} ₹</p>
+                </div>
+                <div class="cart" (click)="addtocart(item)">add</div>
             </div>
-
         </div>
     </div>
 

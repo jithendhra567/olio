@@ -2,10 +2,9 @@
   <div>
     <h3 style="margin-left: 10px; font-weight:600;">Please Select Active Table to serve your Order!</h3>
     <div class="tables">
-      <div *ngFor="let item of tables" class="table" (click)="active(item.id)"
-                                                      [style.background-color]="select[item.id]?'rgb(39, 165, 228)':'rgb(241, 245, 247)'">
-        <div class="ribbon" [style.border-color]="item.active=='active'?'#e65b40':'rgb(29, 228, 128)'" [style.border-left]="'solid 13px transparent'">
-          <ng-container *ngIf="item.active=='active'; else elseTemplate">
+      <div *ngFor="let table of tables" class="table" (click)="active(table)" [style.background-color]="table.status!==0?'rgb(39, 165, 228)':'rgb(241, 245, 247)'">
+        <div class="ribbon" [style.border-color]="table.status!==0?'#e65b40':'rgb(29, 228, 128)'" [style.border-left]="'solid 13px transparent'">
+          <ng-container *ngIf="table.status!==0; else elseTemplate">
             <p>Booked</p>
           </ng-container>
           <ng-template #elseTemplate>
@@ -14,7 +13,7 @@
         </div>
         <img src="https://img.icons8.com/ios/344/restaurant-table.png" alt="">
         <div class="id">
-          <h3>Table No. {{item.id}}</h3>
+          <h3>Table No. {{table.tableNumber}}</h3>
         </div>
       </div>
     </div>
@@ -27,17 +26,14 @@
 </ng-container>
 <ng-template #elseTemplate>
   <div>
-
     <div class="center">
       <div class="shine"></div>
       <div class="success" id="s">
         <p>✔</p>
       </div>
     </div>
-
     <div matRipple class="confirm" style="margin-top: 30px" [routerLink]="['../']">
       <p id="m">Waiting for confirmation.</p>
     </div>
-
   </div>
 </ng-template>

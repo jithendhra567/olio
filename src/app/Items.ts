@@ -1,88 +1,69 @@
+import { type } from "jquery";
+
 export class Name{
-    public static special = "special";
-    public static veg="veg";
-    public static nonVeg="Non-veg";
-    public static count = "count";
-    public static tags="tags";
-    public static menu="menu";
-    public static title="title";
-    public static img="img";
-    public static half="half";
-    public static isFull="isfull";
-    public static prize="prize";
-    public static name_="name";
-    public static id = "id";
-    public static isAdded = "isadded";
-    public static data = "data";
-    public static cartItems="cart";
+  public static special = "special";
+  public static veg="veg";
+  public static nonVeg="Non-veg";
+  public static count = "count";
+  public static tags="tags";
+  public static menu="menu";
+  public static title="title";
+  public static img="img";
+  public static half="half";
+  public static isFull="isfull";
+  public static prize="prize";
+  public static name_="name";
+  public static id = "id";
+  public static data = "data";
+  public static cartItems = "cart";
+  public static blue = "##296fca";
+  public static orange = "#f44336";
 }
 
 export class Items{
-  public static data = [];
   public static allItems = {};
-  public static cartItems = [];
-  public static specialItems = [];
+  public static cartItems:Item[] = [];
 
-  public static setData = (data) => {
-    Items.data = data; Items.update();
-    sessionStorage.setItem(Name.data,JSON.stringify(data));
-  }
-
-  public static update=()=>{
-    Items.updateItems(Items.data);
-    Items.updateSpecialItems();
-    Items.updateCart();
-  }
-
-  public static updateItems = (items) => {
-    var it = JSON.parse(sessionStorage.getItem(Name.cartItems));
-    if(it==undefined || it.length<=0){
-      for (let item in items) {
-        var x = [];
-        for (let i in items[item][Name.menu]) {
-          items[item][Name.menu][i][Name.isAdded] = false;
-          x.push(items[item][Name.menu][i]);
-        }
-        Items.allItems[items[item][Name.id]] = x;
-      };
+  public static isAddedToCart(item: Item) {
+    for (let i = 0; i < Items.cartItems.length; i++){
+      if (Items.cartItems[i].itemId === item.itemId) return true;
     }
-    else Items.allItems = it;
-
+    return false;
   }
 
-  public static updateSpecialItems = () => {
-    Items.specialItems = [];
-    for(var i in Items.allItems){
-      for(var j in Items.allItems[i]){
-        for(var k in Items.allItems[i][j][Name.tags]){
-          if(Items.allItems[i][j][Name.tags][k][Name.name_]==Name.special){
-            Items.specialItems.push(Items.allItems[i][j]);
-          }
-        }
+  public static removeFromCart(item: Item) {
+    Items.cartItems.forEach((val,index) => {
+      if (val.itemId === item.itemId) {
+        Items.cartItems.splice(index, 1);
+        return;
       }
-    }
+    });
   }
+}
 
-  public static getItemsFromMenu = (menu) => {
-    return Items.allItems[menu];
-  }
-  public static updateCart = () => {
-    let items = Items.allItems;
-    let cart = [];
-    for(let i in items) {
-      for(let j in items[i]){
-        if(items[i][j][Name.isAdded]) {
-          var x = items[i][j];
-          x[Name.count] = 0;
-          cart.push(x);
-        }
-      }
-    }
-    Items.cartItems = cart;
-    if(cart.length>0)
-    sessionStorage.setItem(Name.cartItems,JSON.stringify(Items.allItems));
-  }
-  public static getCart = () => {
-    return Items.cartItems;
-  }
+
+export type HotelDetails = {
+  categories: string[];
+  title: string;
+  tables: Table[];
+}
+
+export type Table = {
+  bill: number;
+  capacity: number;
+  order: Item[];
+  reserved_people: number;
+  status: number;
+  tableNumber: number;
+}
+
+export type Item = {
+  itemId: string,
+  itemName: string,
+  categoryName: string,
+  rate: number,
+  stock: number,
+  tags: string[],
+  image: string,
+  count?: number
 }

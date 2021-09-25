@@ -2,6 +2,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Items, Table } from '../Items';
 @Component({
   selector: 'app-placeorder',
   templateUrl: './placeorder.component.html',
@@ -10,53 +11,54 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class PlaceorderComponent implements OnInit {
 
   hotelname = '';
-  tables = [];
+  tables: Table[] = [];
   select = [];
   isordered = false;
+  prevSelected = -1;
   constructor(public route:ActivatedRoute,public db:AngularFirestore,public snackBar:MatSnackBar) {
     this.hotelname = (route.snapshot.params.hotel);
     db.collection('hotels').doc(this.hotelname).get().toPromise()
     .then(data => {
-      this.tables = data.data()['tablesinfo'];
+      console.log(data.data())  
+      this.tables = data.data()['tables'];
     });
   }
 
   ngOnInit(): void {
   }
 
-  order(){
-    var isselect = {id: 0,isselected:false};
-    this.select.forEach((select,i) => {if(select) isselect = {id:i,isselected:true}});
-    if(isselect.isselected)
-    {
-      this.isordered=!this.isordered;
-      var cart  = JSON.parse(sessionStorage.getItem("cartdetails"));
-      var cartdetails = [];
-      for(var i in cart){
-        if(cart[i].isadded) cartdetails.push(cart[i]);
-      }
-      this.tables[isselect.id-1]['orderitems'] = cartdetails.length;
-      this.tables[isselect.id-1]['active'] = 'active';
-      this.tables[isselect.id-1]['name'] = 'Occupied';
-      this.tables[isselect.id-1]['orders'] = cartdetails;
-      this.db.collection('hotels').doc(this.hotelname).set({tablesinfo:this.tables},{merge: true})
-      .then(() => {
-        var ele = document.getElementById("s");
+  order() {
+    this.isordered = true;
+    this.tables[this.prevSelected].order = Items.cartItems;
+    this.db.collection('hotels').doc(this.hotelname).set({tables:this.tables},{merge: true})
+    .then(() => {
+      setTimeout(() => {
+        const ele = document.getElementById("s");
+        console.log(ele)
         ele.style.transform = "scale(1)";
-        document.getElementById('m').innerText="Order Done, Go Back and Sit";
-      });
-
-    }
-    else var snackBarRef = this.snackBar.open('Select Any Table', 'Try again',{
-      duration: 2000,
+        document.getElementById('m').innerText = "Order Done, Go Back and Sit";
+      }, 500);
     });
   }
 
-  active(id){
-    this.select = [];
-    if(this.tables[parseInt(id)-1]['active'] == 'inactive')
-      this.select[id] = !this.select[id];
-    else  this.snackBar.open('Select Active Table', 'Try again',{
+  getIndex(id) {
+    let index = -1;
+    this.tables.forEach((val, i) => {
+      if (val.tableNumber = id) index = i;
+    })
+    return index;
+  }
+
+  active(table:Table){
+    const index = this.getIndex(table.tableNumber);
+    if (this.prevSelected !== -1) {
+      this.tables[this.prevSelected].status === 0;
+    }
+    if (this.tables[index].status === 0) {
+      this.tables[index].status = 1;
+      this.prevSelected = index;
+    }
+    else  this.snackBar.open('please select Active Table', 'Try again',{
       duration: 2000,
     });
   }

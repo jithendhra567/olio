@@ -10,87 +10,46 @@ p {
 
 .horizantal_scrollmenu {
   padding: 20px;
-
   .toolbar {
     display: flex;
-
     .title {
       justify-self: flex-start;
     }
-
     .spacer {
       flex: 1 1 auto;
     }
-
     .veg {
       justify-self: flex-end;
       margin: 5px;
     }
   }
-
+  
   .scroll {
-    display: flex;
     overflow-x: scroll;
+    width: 100%;
     overflow-y: hidden;
     align-items: center;
-
-    .item {
-      margin: 10px;
-      border-radius: 7px;
-      box-shadow: 1px 1px 4px 2px rgba(77, 74, 74, 0.137);
-      background-color: $menu;
-      width: 70vw;
+    .cats{
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      .item_image {
-        img {
-          width: 70vw;
-          border-top-left-radius: 7px;
-          border-top-right-radius: 7px;
-        }
+      overflow: auto;
+      padding: 10px 0px;
+      white-space: nowrap;
+      .cat{
+        margin: 10px 10px 10px 4px;
+        box-shadow: 1px 2px 2px rgba($color: #000000, $alpha: 0.2);
+        border-radius: 2px;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 14px;
+        height: 25px;
+        border-left: 3px rgb(46, 77, 255) solid;
+        transition: all .3s ease-in-out;
       }
-
-      .item_content {
-        display: flex;
-        padding: 10px 10px 0px 10px;
-        justify-content: space-between;
-
-        .main_content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          .veg {
-            background-color: #ff5722;
-            font-size: 11px;
-            color: white;
-            margin-top: -10px;
-            padding-left: 5px;
-            padding-right: 5px;
-            border-radius: 3px;
-            align-self: start;
-          }
-
-        }
-
-        .side_content {
-          display: flex;
-          flex-direction: column;
-
-          p {
-            margin-top: -10px;
-            font-size: 24px;
-            font-weight: 600;
-            color: #4caf50;
-            align-self: flex-end;
-          }
-        }
+      .cat:active{
+        background-color: #5c77ff;
+        color: white;
       }
     }
-
-
   }
 }
 
