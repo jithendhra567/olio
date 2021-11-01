@@ -44,7 +44,7 @@ export class PlaceorderComponent implements OnInit {
   getIndex(id) {
     let index = -1;
     this.tables.forEach((val, i) => {
-      if (val.tableNumber = id) index = i;
+      if (val.tableNumber === id) index = i;
     })
     return index;
   }
@@ -52,14 +52,14 @@ export class PlaceorderComponent implements OnInit {
   active(table:Table){
     const index = this.getIndex(table.tableNumber);
     if (this.prevSelected !== -1) {
-      this.tables[this.prevSelected].status === 0;
+      this.tables[this.prevSelected].status = 0;
     }
     if (this.tables[index].status === 0) {
       this.tables[index].status = 1;
       this.prevSelected = index;
     }
     else  this.snackBar.open('please select Active Table', 'Try again',{
-      duration: 2000,
+      duration: 1000,
     });
   }
 

@@ -34,46 +34,24 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router,public route:ActivatedRoute, db:AngularFirestore,private _bottomSheet: MatBottomSheet){
     this.db=db;
     this.hotel_name = route.snapshot.params.hotel;
-    sessionStorage.clear();
-    // var items = JSON.parse(sessionStorage.getItem(Name.data));
-    // if(items != undefined && items.length > 0) {
-    //   Items.setData(items);
-    //   this.data = items;
-    //   this.specials = Items.specialItems;
-    // }
-    // else {
-    //   db.collection(this.hotel_name).valueChanges().subscribe((val) => {
-    //     console.log();
-    //     // val.forEach((doc)=>this.data.push(doc));
-    //     // Items.setData(this.data);
-    //     // this.specials = Items.specialItems;
-    //   });
-    // }
-
-    db.collection(this.hotel_name).valueChanges().subscribe((val) => {
-      console.log(val);
-      // val.forEach((doc)=>this.data.push(doc));
-      // Items.setData(this.data);
-      // this.specials = Items.specialItems;
-    });
+    // db.collection(this.hotel_name).valueChanges().subscribe((val) => {
+    //   console.log(val);
+    //   // val.forEach((doc)=>this.data.push(doc));
+    //   // Items.setData(this.data);
+    //   // this.specials = Items.specialItems;
+    // });
     db.collection('hotels').doc(this.hotel_name).valueChanges().subscribe((val: HotelDetails) => {
       const temp: string[] = val.categories;
-      const cats: string[][] = [];
-      const catTemp: string[] = [];
-      let i = 0;
-      temp.forEach(item => {
-        catTemp.push(item);
-        i++;
-        if (i === 4) {
-          cats.push(catTemp);
-          i = 0;
+      const cats: string[] = [];
+      for (let i = 0; i < temp.length; i++){
+        if (i % 4 == 0) {
+          console.log(i, cats)
+          this.categories.push(cats.map(m=>m));
+          cats.splice(0, cats.length - 1);
         }
-      });
-      this.categories = cats;
+        else cats.push(temp[i]);
+      }
     });
-
-    //this.cartupdate();
-
   }
 
   cartupdate(){

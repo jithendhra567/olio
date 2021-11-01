@@ -18,12 +18,10 @@ import { ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
 
-  title="Check Url";
+  title="POS";
   constructor(public route:ActivatedRoute,public db:AngularFirestore) {
     var hotel = window.location.pathname.split("/")[1];
-    db.collection("hotels").doc(hotel).get().toPromise()
-    .then(data=>this.title=data.data()['title'])
-    .catch(err=>console.log(err))
+    
   }
 
   ngOnInit(): void {
