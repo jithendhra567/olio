@@ -23,41 +23,27 @@ export class MenuComponent implements OnInit {
   data = [];
   specials = [];
   menuItems = {};
-  categories = [];
+  categories: {name: string, image: string}[] = [];
   color: ThemePalette = 'primary';
   checked = false;
   disabled = false;
   db: AngularFirestore;
   hotel_name = '';
+  blockColor = {};
+  randomColor = ["#845EC2", "#D65DB1", "#FF6F91", "#FF9671", "#FFC75F", "#2C73D2", "#0089BA", "#008E9B","#00C9A7","#4B4453"];
   @ViewChild("notify") cart_notification;
 
   constructor(private router: Router,public route:ActivatedRoute, db:AngularFirestore,private _bottomSheet: MatBottomSheet){
     this.db=db;
     this.hotel_name = route.snapshot.params.hotel;
-    // db.collection(this.hotel_name).valueChanges().subscribe((val) => {
-    //   console.log(val);
-    //   // val.forEach((doc)=>this.data.push(doc));
-    //   // Items.setData(this.data);
-    //   // this.specials = Items.specialItems;
-    // });
     db.collection('hotels').doc(this.hotel_name).valueChanges().subscribe((val: HotelDetails) => {
-      const temp: string[] = val.categories;
-      const cats: string[] = [];
-      for (let i = 0; i < temp.length; i++){
-        if (i % 4 == 0) {
-          console.log(i, cats)
-          this.categories.push(cats.map(m=>m));
-          cats.splice(0, cats.length - 1);
-        }
-        else cats.push(temp[i]);
-      }
+      this.categories = val.categoriesData;
     });
   }
 
   cartupdate(){
     this.specials.forEach((item)=>{
       const [index,__id] = this.getId(item[Name.id]);
-
     });
   }
 

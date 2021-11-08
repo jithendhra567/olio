@@ -43,7 +43,7 @@ export class Items{
 
 
 export type HotelDetails = {
-  categories: string[];
+  categoriesData: {name: string, image: string}[];
   title: string;
   tables: Table[];
 }

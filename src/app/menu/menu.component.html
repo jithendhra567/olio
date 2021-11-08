@@ -34,8 +34,9 @@
         <div class="card" style="margin-top: -10px; background-color: #3b3a3aa9;">
         </div>
         <div class="scroll">
-            <div class="cats" *ngFor="let items of categories">
-                <p class="cat" *ngFor="let item of items" [routerLink]="['./items',item]">{{item.toUpperCase()}}</p>
+            <div class="cats" *ngFor="let item of categories">
+                <img [src]="item.image" alt="">
+                <p class="cat" [routerLink]="['./items',item]">{{item.name.toUpperCase()}}</p>
             </div>
         </div>
         <!-- <div class="scroll">
