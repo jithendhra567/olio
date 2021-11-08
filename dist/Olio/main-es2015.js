@@ -572,11 +572,10 @@ function MenuComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const item_r3 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, item_r3.name));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("src", item_r3.image, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeUrl"]);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](3, _c1, item_r3));
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r3.name.toUpperCase());
 } }
 class MenuComponent {
@@ -653,7 +652,7 @@ MenuComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
     } if (rf & 2) {
         var _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.cart_notification = _t.first);
-    } }, decls: 19, vars: 2, consts: [["id", "search", 1, "search"], ["aria-hidden", "false", "aria-label", "Search"], ["type", "text", "placeholder", "Search ... ", 1, "search_text"], ["matRipple", "", 1, "card"], [1, "search_item"], ["id", "content"], [1, "body_olio"], ["interval", "2000", 3, "showNavigationArrows"], ["ngbSlide", ""], [1, "horizantal_scrollmenu"], [1, "toolbar"], [1, "title"], [1, "card", 2, "margin-top", "-10px", "background-color", "#3b3a3aa9"], [1, "scroll"], ["class", "cats", 4, "ngFor", "ngForOf"], [1, "picsum-img-wrapper"], ["src", "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2Vyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", "alt", "Angular Carousel 1", 1, "carosuel_img"], ["src", "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", "alt", "Angular Carousel 2", 1, "carosuel_img"], [1, "cats"], ["alt", "", 3, "src"], [1, "cat", 3, "routerLink"]], template: function MenuComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 19, vars: 2, consts: [["id", "search", 1, "search"], ["aria-hidden", "false", "aria-label", "Search"], ["type", "text", "placeholder", "Search ... ", 1, "search_text"], ["matRipple", "", 1, "card"], [1, "search_item"], ["id", "content"], [1, "body_olio"], ["interval", "2000", 3, "showNavigationArrows"], ["ngbSlide", ""], [1, "horizantal_scrollmenu"], [1, "toolbar"], [1, "title"], [1, "card", 2, "margin-top", "-10px", "background-color", "#3b3a3aa9"], [1, "scroll"], ["class", "cats", 3, "routerLink", 4, "ngFor", "ngForOf"], [1, "picsum-img-wrapper"], ["src", "https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2Vyc3xlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", "alt", "Angular Carousel 1", 1, "carosuel_img"], ["src", "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", "alt", "Angular Carousel 2", 1, "carosuel_img"], [1, "cats", 3, "routerLink"], ["alt", "", 3, "src"], [1, "cat"]], template: function MenuComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "mat-icon", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "add_shopping_cart");
