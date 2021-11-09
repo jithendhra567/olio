@@ -3,8 +3,6 @@
         <h3>Items</h3>
         <mat-divider></mat-divider>
     </div>
-
-
     <ng-container *ngIf="cartItems.length>0; else elseTemplate">
         <div class="items">
             <div *ngFor="let cart of cartItems" class="item" id="{{cart.itemId}}">
@@ -14,15 +12,8 @@
             <div class="item_content">
                 <div class="main">
                     <div class="content">
-                        <h3>{{cart.title}}</h3>
+                        <h3>{{cart.itemName}}</h3>
                         <div class="cont">
-                            <!-- <div class="veg">{{cart.veg}}</div> -->
-                            <!-- <div class="half">
-                            <ng-container *ngIf="cart.half; else elseTemplate">
-                                <mat-checkbox [checked]="!cart.isfull" (click)="half(cart.id)">Half</mat-checkbox>
-                            </ng-container>
-                            <ng-template #elseTemplate><h4></h4></ng-template>
-                            </div> -->
                         </div>
                     </div>
                     <div class="count">
@@ -47,57 +38,15 @@
         <p style="font-size:30px; margin-top: 20px; margin-bottom: 20px; color: rgba(151, 151, 151, 0.801);">No Items</p>
     </ng-template>
 
-
-    <!-- <div class="title">
-        <h3 style="font-size: 13px;">Add-on</h3>
-        <mat-divider></mat-divider>
-    </div>
-    <div class="items">
-
-        <div class="item" id="cart.id" style="height: 70px;">
-            <div class="item_image">
-                <img class="shine" style="width: 60px; height: 60px;" src="../../assets/img/coke.png"/>
-            </div>
-            <div class="item_content">
-                <div class="main">
-                    <div class="content">
-                        <h3>cart.title</h3>
-                        <div class="veg" style="background-color: rgb(153, 92, 233);">Add on</div>
-                    </div>
-
-                    <div>
-                        <div class="counter">
-                            <div matRipple id="add">
-                                <mat-icon>add</mat-icon>
-                            </div>
-                            <p>1</p>
-                            <div matRipple id="remove">
-                                <mat-icon style="margin-top: -9px;">minimize</mat-icon>
-                            </div>
-                        </div>
-                        <h4>$ 230</h4>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-
-
-
-
-
-    </div> -->
-
     <div class="bottom">
-      <div class="total-price">
-          <h4>Total</h4>
-          <p>₹ {{total}}</p>
-      </div>
-      <div matRipple (click)="initPay()"   class="placeorder">
-          <h3>Place Order</h3>
-          <mat-icon>contactless</mat-icon>
-      </div>
+        <div class="total-price">
+            <h4>Total</h4>
+            <p>₹ {{total}}</p>
+        </div>
+        <div matRipple (click)="initPay()"   class="placeorder">
+            <h3>Place Order</h3>
+            <mat-icon>contactless</mat-icon>
+        </div>
     </div>
 
 
