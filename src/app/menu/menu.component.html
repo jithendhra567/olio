@@ -27,9 +27,10 @@
     <div class="horizantal_scrollmenu" >
         <div class="toolbar">
             <h1 class="title">Menu</h1>
-            <!-- <span class="spacer"></span>
-            <p class="veg" style="margin-top: 8px;">VEG</p>
-            <mat-slide-toggle class="veg" [color]="color" [checked]="checked" [disabled]="disabled"></mat-slide-toggle> -->
+            <span class="spacer"></span>
+            <div matRipple class="floatingcart" (click)="cart()">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </div>
         </div>
         <div class="card" style="margin-top: -10px; background-color: #3b3a3aa9;">
         </div>

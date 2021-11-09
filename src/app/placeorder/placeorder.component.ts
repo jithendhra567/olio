@@ -14,14 +14,16 @@ export class PlaceorderComponent implements OnInit {
   tables: Table[] = [];
   select = [];
   isordered = false;
+  tableAlreadySelected = undefined;
   prevSelected = -1;
   constructor(public route:ActivatedRoute,public db:AngularFirestore,public snackBar:MatSnackBar) {
     this.hotelname = (route.snapshot.params.hotel);
     db.collection('hotels').doc(this.hotelname).get().toPromise()
     .then(data => {
-      console.log(data.data())  
       this.tables = data.data()['tables'];
     });
+    const i = sessionStorage.getItem('tableNumber');
+    if (i) this.tableAlreadySelected = i;
   }
 
   ngOnInit(): void {
@@ -29,15 +31,16 @@ export class PlaceorderComponent implements OnInit {
 
   order() {
     this.isordered = true;
-    this.tables[this.prevSelected].order = Items.cartItems;
+    this.tables[this.prevSelected].order.push(...Items.cartItems);
+    sessionStorage.setItem('tableNumber', this.prevSelected + "");
     this.db.collection('hotels').doc(this.hotelname).set({tables:this.tables},{merge: true})
-    .then(() => {
-      setTimeout(() => {
-        const ele = document.getElementById("s");
-        console.log(ele)
-        ele.style.transform = "scale(1)";
-        document.getElementById('m').innerText = "Order Done, Go Back and Sit";
-      }, 500);
+      .then(() => {
+        Items.prevCartItems.push(...Items.cartItems.splice(0, Items.cartItems.length));
+        setTimeout(() => {
+          const ele = document.getElementById("s");
+          ele.style.transform = "scale(1)";
+          document.getElementById('m').innerText = "Order Done, Go Back and Sit";
+        }, 500);
     });
   }
 

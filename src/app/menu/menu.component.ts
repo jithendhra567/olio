@@ -70,19 +70,12 @@ export class MenuComponent implements OnInit {
     this.cart_notification.nativeElement.innerText = Items.cartItems.length;
   }
 
-
   cart(){
     var bottomSheetRef = this._bottomSheet.open(OrderComponent);
     bottomSheetRef.afterDismissed().subscribe(() => {
-      this.specials.forEach((item)=>{
-        const [index,__id] = this.getId(item[Name.id]);
-        this.addtocart(item[Name.id]);
-      });
-
       if(bottomSheetRef.instance.isPlaceOrder)
         this.router.navigate([this.hotel_name+'/placeorder']);
     });
-
   }
 
 

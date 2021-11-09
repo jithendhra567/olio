@@ -22,7 +22,8 @@ export class Name{
 
 export class Items{
   public static allItems = {};
-  public static cartItems:Item[] = [];
+  public static cartItems: Item[] = [];
+  public static prevCartItems: Item[] = [];
 
   public static isAddedToCart(item: Item) {
     for (let i = 0; i < Items.cartItems.length; i++){

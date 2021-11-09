@@ -69,7 +69,6 @@ export class CategoriesComponent implements OnInit {
       if(bottomSheetRef.instance.isPlaceOrder)
         this.router.navigate([this.hotel_name+'/placeorder']);
     });
-
   }
 
 
