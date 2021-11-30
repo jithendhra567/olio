@@ -1,31 +1,42 @@
 <ng-container *ngIf="!isordered; else elseTemplate">
   <div>
-    <h3 style="margin-left: 10px; font-weight:600;">Please Select Active Table to serve your Order!</h3>
-    <div class="tables" *ngIf="!tableAlreadySelected">
-      <div *ngFor="let table of tables" class="table" (click)="active(table)" [style.background-color]="table.status!==0?'rgb(39, 165, 228)':'rgb(241, 245, 247)'">
-        <div class="ribbon" [style.border-color]="table.status!==0?'#e65b40':'rgb(29, 228, 128)'" [style.border-left]="'solid 13px transparent'">
-          <ng-container *ngIf="table.status!==0; else elseTemplate">
-            <p>Booked</p>
-          </ng-container>
-          <ng-template #elseTemplate>
-            <p>Active</p>
-          </ng-template>
-        </div>
-        <img src="https://img.icons8.com/ios/344/restaurant-table.png" alt="">
-        <div class="id">
-          <h3>Table No. {{table.tableNumber}}</h3>
+    <div *ngIf="!tableAlreadySelected">
+      <div style="display: flex; margin-left: 10px;">
+        <mat-icon aria-hidden="false" [routerLink]="['../']" aria-label="Search">arrow_back</mat-icon>
+        <h3 style="margin-left: 10px; margin-left: 20px; font-weight:600;">Please Select Active Table to serve your Order!</h3>
+      </div>
+      <div class="tables" >
+        <div *ngFor="let table of tables" class="table" (click)="active(table)" [style.background-color]="table.status!==0?'rgb(39, 165, 228)':'rgb(241, 245, 247)'">
+          <div class="ribbon" [style.border-color]="table.status!==0?'#e65b40':'rgb(29, 228, 128)'" [style.border-left]="'solid 13px transparent'">
+            <ng-container *ngIf="table.status!==0; else elseTemplate">
+              <p>Booked</p>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <p>Active</p>
+            </ng-template>
+          </div>
+          <img src="https://img.icons8.com/ios/344/restaurant-table.png" alt="">
+          <div class="id">
+            <h3>Table No. {{table.tableNumber}}</h3>
+          </div>
         </div>
       </div>
     </div>
-    <div class="tables" *ngIf="tableAlreadySelected">
-      <div class="table">
-        <img src="https://img.icons8.com/ios/344/restaurant-table.png" alt="">
-        <div class="id">
-          <h3>Your Table No. {{tableAlreadySelected}}</h3>
+    <div  *ngIf="tableAlreadySelected">
+      <div style="display: flex; margin-left: 10px;">
+        <mat-icon aria-hidden="false" [routerLink]="['../']" aria-label="Search">arrow_back</mat-icon>
+        <h3 style="margin-left: 10px; margin-left: 20px; font-weight:600;">Your Order is being prepared! order new one</h3>
+      </div>
+      <div class="tables">
+        <div class="table" style=" background-color: rgb(39, 165, 228);">
+          <img src="https://img.icons8.com/ios/344/restaurant-table.png" alt="">
+          <div class="id">
+            <h3>Your Table No. {{tableAlreadySelected}}</h3>
+          </div>
         </div>
       </div>
     </div>
-    <div matRipple class="confirm" (click)="order()">
+    <div *ngIf="(prevSelected!==-1 || tableAlreadySelected) && itemsLength>0" matRipple class="confirm" (click)="order()">
       <p>Confirm Order</p>
     </div>
   </div>

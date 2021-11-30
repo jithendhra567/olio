@@ -12,6 +12,7 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 import { InfoComponent } from '../info/info.component';
 import { HttpParams } from '@angular/common/http';
 import { OrderComponent } from '../order/order.component';
+import { PrevOrdersComponent } from '../prev-orders/prev-orders.component';
 
 @Component({
   selector: 'app-menu',
@@ -71,11 +72,11 @@ export class MenuComponent implements OnInit {
   }
 
   cart(){
-    var bottomSheetRef = this._bottomSheet.open(OrderComponent);
-    bottomSheetRef.afterDismissed().subscribe(() => {
-      if(bottomSheetRef.instance.isPlaceOrder)
-        this.router.navigate([this.hotel_name+'/placeorder']);
-    });
+    var bottomSheetRef = this._bottomSheet.open(PrevOrdersComponent);
+    // bottomSheetRef.afterDismissed().subscribe(() => {
+    //   if(bottomSheetRef.instance.isPlaceOrder)
+    //     this.router.navigate([this.hotel_name+'/placeorder']);
+    // });
   }
 
 

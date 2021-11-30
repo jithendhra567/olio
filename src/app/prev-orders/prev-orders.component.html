@@ -1,7 +1,7 @@
 <div class="order">
     <div>
         <div class="title">
-            <h3>Items</h3>
+            <h3>Previously order Items</h3>
             <mat-divider></mat-divider>
         </div>
         <ng-container *ngIf="cartItems.length>0; else elseTemplate">
@@ -18,17 +18,7 @@
                             </div>
                         </div>
                         <div class="count">
-                            <div class="counter">
-                                <div matRipple (click)="add(cart.itemId)">
-                                    <mat-icon>add</mat-icon>
-                                </div>
-                                <p>{{cart.count}}</p>
-                                <div matRipple (click)="remove(cart.itemId)">
-                                    <mat-icon style="margin-top: -1px;">minimize</mat-icon>
-                                </div>
-                            </div>
                             <h4>₹ {{cart.count*cart.rate}}</h4>
-                            <div matRipple class="addtocart" id="cart" (click)="removefromcart(cart.itemId)">  <mat-icon class="icon">add_shopping_cart</mat-icon> <p name="addtocart">remove</p>  </div>
                         </div>
                     </div>
                 </div>
@@ -39,17 +29,5 @@
             <p style="font-size:30px; margin-top: 20px; margin-bottom: 20px; color: rgba(151, 151, 151, 0.801);">No Items</p>
         </ng-template>
     </div>
-    <div class="bottom">
-        <div class="total-price">
-            <h4>Total</h4>
-            <p>₹ {{total}}</p>
-        </div>
-        <div matRipple (click)="initPay()"   class="placeorder">
-            <h3>Place Order</h3>
-            <mat-icon>contactless</mat-icon>
-        </div>
-    </div>
-
-
 </div>
 

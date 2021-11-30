@@ -15,6 +15,7 @@ export class PlaceorderComponent implements OnInit {
   select = [];
   isordered = false;
   tableAlreadySelected = undefined;
+  itemsLength = Items.cartItems.length;
   prevSelected = -1;
   constructor(public route:ActivatedRoute,public db:AngularFirestore,public snackBar:MatSnackBar) {
     this.hotelname = (route.snapshot.params.hotel);
@@ -31,9 +32,10 @@ export class PlaceorderComponent implements OnInit {
 
   order() {
     this.isordered = true;
+    if (this.tableAlreadySelected !== undefined) this.prevSelected = this.tableAlreadySelected;
     this.tables[this.prevSelected].order.push(...Items.cartItems);
     sessionStorage.setItem('tableNumber', this.prevSelected + "");
-    this.db.collection('hotels').doc(this.hotelname).set({tables:this.tables},{merge: true})
+    this.db.collection('hotels').doc(this.hotelname).update({tables:this.tables})
       .then(() => {
         Items.prevCartItems.push(...Items.cartItems.splice(0, Items.cartItems.length));
         setTimeout(() => {

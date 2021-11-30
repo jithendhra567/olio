@@ -27,6 +27,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { InfoComponent } from './info/info.component';
 import {MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION} from '@angular/material/checkbox';
 import { PlaceorderComponent } from './placeorder/placeorder.component';
+import { PrevOrdersComponent } from './prev-orders/prev-orders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { PlaceorderComponent } from './placeorder/placeorder.component';
     CategoriesComponent,
     OrderComponent,
     InfoComponent,
-    PlaceorderComponent
+    PlaceorderComponent,
+    PrevOrdersComponent
   ],
   imports: [
     BrowserModule,
